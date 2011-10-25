@@ -1,0 +1,9 @@
+.gbEntry { width: 300px; padding: 1em;}
+.entryHead { background-color: #6495ed; padding: 5px; border-radius: 20px 20px 0 0; -moz-border-radius: 20px 20px 0 0;}
+.entryHead span.userContainer {margin-left: 3px;}
+.entryHead span.dateContainer {float: right; margin-right: 3px; }
+.entryHead span.user {color: white; font-style: italic;}
+.entryHead a {font-style: normal; font-weight: bold; color: white;}
+.entryHead a:hover {color: #deb887;}
+.entryHead span.date {color: #f5f5dc;}
+.entryBody { background-color: #add8e6; padding: 5px; border-radius: 0 0 10px 10px; -moz-border-radius: 0 0 10px 10px;}
