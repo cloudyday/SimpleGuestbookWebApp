@@ -13,7 +13,7 @@ class UserController {
             def userInstance = new User(params)
             if (userInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])}"
-                redirect(action: "show", id: userInstance.id)
+                redirect(action: "login", model:[userInstance:userInstance])
             }
             else {
                 return [userInstance: userInstance]
