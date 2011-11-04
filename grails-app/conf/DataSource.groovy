@@ -1,4 +1,5 @@
-dataSource {
+
+/*dataSource {
     pooled = true
     driverClassName = "org.hsqldb.jdbcDriver"
     username = "sa"
@@ -29,4 +30,6 @@ environments {
             url = "jdbc:hsqldb:file:prodDb;shutdown=true"
         }
     }
-}
+}*/
+
+
