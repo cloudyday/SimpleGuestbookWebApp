@@ -1,6 +1,7 @@
 import org.springframework.context.ApplicationContext
 import org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean
 import org.apache.commons.dbcp.BasicDataSource
+import simpleguestbook.VCAPService
 
 class BootStrap {
 
@@ -21,11 +22,12 @@ class BootStrap {
 
         if (dataSourceBean) {
             def updatedValues = [:]
+            VCAPService  test  = new VCAPService()
 
-            updatedValues.url = "jdbc:hsqldb:mem:devDB"
-            updatedValues.driverClassName = "org.hsqldb.jdbcDriver"
-            updatedValues.username = "sa"
-            updatedValues.password = ""
+            updatedValues.url = test.serviceMethod("url").get(3)//"jdbc:hsqldb:mem:devDB"
+            updatedValues.driverClassName = test.serviceMethod("driverClassName").get(3)//"org.hsqldb.jdbcDriver"
+            updatedValues.username = test.serviceMethod("username").get(3)//"sa"
+            updatedValues.password = test.serviceMethod("password").get(3)//""
 
             dataSourceBean.driverClassName = updatedValues.driverClassName
             dataSourceBean.url = updatedValues.url
