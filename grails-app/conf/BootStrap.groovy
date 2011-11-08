@@ -20,26 +20,23 @@ class BootStrap {
             dataSourceBean = beanFactory.getBean('dataSource')
         }
 
+        def services = new VCAPService().getAvailableServices()
+
+        def mysqlServices = services.get("mysql")
+        if(mysqlServices.isEmpty()) {
+            throw new Exception("No Mysql Services found in VCAP_SERVICES")
+        }
+
+
+        def mysql = mysqlServices.get(mysqlServices.keySet().asList().get(0))
+
+
         if (dataSourceBean) {
-            def updatedValues = [:]
-            VCAPService  test  = new VCAPService()
-            updatedValues.url = ""+test.serviceMethod("hostname").get(0)+":"+test.serviceMethod("port").get(0)
-            updatedValues.name = test.serviceMethod("name").get(0)
-
-            updatedValues.user = test.serviceMethod("user").get(0)
-            updatedValues.passwort = test.serviceMethod("passwort").get(0)
-
-            //updatedValues.url = test.serviceMethod("url").get(3)//"jdbc:hsqldb:mem:devDB"
-            //updatedValues.driverClassName = test.serviceMethod("driverClassName").get(3)//"org.hsqldb.jdbcDriver"
-            //updatedValues.username = test.serviceMethod("username").get(3)//"sa"
-            //updatedValues.password = test.serviceMethod("password").get(3)//""
 
             dataSourceBean.driverClassName = "com.mysql.jdbc.Driver"
-            dataSourceBean.url = updatedValues.url
-            dataSourceBean.name = updatedValues.name
-            dataSourceBean.user = updatedValues.user
-
-            dataSourceBean.password = updatedValues.password
+            dataSourceBean.url = mysql.get("hostname")+":"+mysql.get("port")
+            dataSourceBean.username = mysql.get("user")
+            dataSourceBean.password = mysql.get("password")
 
             // get hibernate session factory (the factory, not the beans created from it)
             def sessionFactory = beanFactory.getBean("&sessionFactory")
