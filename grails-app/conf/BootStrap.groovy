@@ -23,15 +23,22 @@ class BootStrap {
         if (dataSourceBean) {
             def updatedValues = [:]
             VCAPService  test  = new VCAPService()
+            updatedValues.url = ""+test.serviceMethod("hostname").get(0)+":"+test.serviceMethod("port").get(0)
+            updatedValues.name = test.serviceMethod("name").get(0)
 
-            updatedValues.url = test.serviceMethod("url").get(3)//"jdbc:hsqldb:mem:devDB"
-            updatedValues.driverClassName = test.serviceMethod("driverClassName").get(3)//"org.hsqldb.jdbcDriver"
-            updatedValues.username = test.serviceMethod("username").get(3)//"sa"
-            updatedValues.password = test.serviceMethod("password").get(3)//""
+            updatedValues.user = test.serviceMethod("user").get(0)
+            updatedValues.passwort = test.serviceMethod("passwort").get(0)
 
-            dataSourceBean.driverClassName = updatedValues.driverClassName
+            //updatedValues.url = test.serviceMethod("url").get(3)//"jdbc:hsqldb:mem:devDB"
+            //updatedValues.driverClassName = test.serviceMethod("driverClassName").get(3)//"org.hsqldb.jdbcDriver"
+            //updatedValues.username = test.serviceMethod("username").get(3)//"sa"
+            //updatedValues.password = test.serviceMethod("password").get(3)//""
+
+            dataSourceBean.driverClassName = "com.mysql.jdbc.Driver"
             dataSourceBean.url = updatedValues.url
-            dataSourceBean.username = updatedValues.userName
+            dataSourceBean.name = updatedValues.name
+            dataSourceBean.user = updatedValues.user
+
             dataSourceBean.password = updatedValues.password
 
             // get hibernate session factory (the factory, not the beans created from it)
