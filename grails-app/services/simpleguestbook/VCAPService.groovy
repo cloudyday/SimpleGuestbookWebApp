@@ -14,7 +14,7 @@ class VCAPService {
 
         //create test VCAP_Servce
         //String VCAP_SERVICES = System.getenv('VCAP_SERVICES')
-                  String VCAP_SERVICES= "{'hyper': [{'name':'hyber', 'label':'redis-2.2','plan':'free', 'credentials':{'url':'jdbc:hsqldb:mem:devDB','driverClassName': 'org.hsqldb.jdbcDriver', 'username': 'sa','password':''}}],'redis-2.2':[{'name':'redis-1d8e28a',  'label':'redis-2.2','plan':'free',  'credentials':{'node_id':'redis_node_3','hostname':'172.30.48.42','port':5004,'password':'1463d9d0-4e35-4f2e-be2f-01dc5536f183','name':'redis-1a69a915-6522-496c-93d5-1271d2b3118e'}}],'mongodb-1.8':[{'name':'mongodb-3854dbe','label':'mongodb-1.8','plan':'free','credentials':{'hostname':'172.30.48.63','port':25003,'username':'b6877670-da98-4124-85ca-84357f042797','password':'f53e6a4b-f4b8-497d-ac81-43cb22cf1e88','name':'mongodb-9dda2cfb-9672-4d58-8786-98c3abcb21ec','db':'db'}}],'mysql-5.1':[{'name':'mysql-497b12e','label':'mysql-5.1','plan':'free','credentials':{'node_id':'mysql_node_8','hostname':'172.30.48.27','port':3306,'password':'p3rO5K5lRZaEU','name':'d887d4f5664f64dde86f3ce42c6333962','user':'umuPIJ8IzSKVA'}}]}"
+                  String VCAP_SERVICES= System.getenv('VCAP_SERVICES')//"{'hyper': [{'name':'hyber', 'label':'redis-2.2','plan':'free', 'credentials':{'url':'jdbc:hsqldb:mem:devDB','driverClassName': 'org.hsqldb.jdbcDriver', 'username': 'sa','password':''}}],'redis-2.2':[{'name':'redis-1d8e28a',  'label':'redis-2.2','plan':'free',  'credentials':{'node_id':'redis_node_3','hostname':'172.30.48.42','port':5004,'password':'1463d9d0-4e35-4f2e-be2f-01dc5536f183','name':'redis-1a69a915-6522-496c-93d5-1271d2b3118e'}}],'mongodb-1.8':[{'name':'mongodb-3854dbe','label':'mongodb-1.8','plan':'free','credentials':{'hostname':'172.30.48.63','port':25003,'username':'b6877670-da98-4124-85ca-84357f042797','password':'f53e6a4b-f4b8-497d-ac81-43cb22cf1e88','name':'mongodb-9dda2cfb-9672-4d58-8786-98c3abcb21ec','db':'db'}}],'mysql-5.1':[{'name':'mysql-497b12e','label':'mysql-5.1','plan':'free','credentials':{'node_id':'mysql_node_8','hostname':'172.30.48.27','port':3306,'password':'p3rO5K5lRZaEU','name':'d887d4f5664f64dde86f3ce42c6333962','user':'umuPIJ8IzSKVA'}}]}"
 
         try{
 
@@ -23,7 +23,7 @@ class VCAPService {
             servicesMap.each { key, services ->
 
             if (key.startsWith('mysql')) {
-                 println("4")
+
                for (service in services) {
                    //insert mysql information
                        mysql =[name:"$service.name", hostname:"$service.credentials.hostname", port:"$service.credentials.port", user:"$service.credentials.user", password:"$service.credentials.password"]
